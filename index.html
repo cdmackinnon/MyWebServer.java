@@ -56,10 +56,9 @@
     }
 
     ul li {
-      margin-left: 2em; /* Adjust indentation as needed */
+      margin-left: 2em;
     }
 
-    /* Override centering for specific headings */
     h2 {
       text-align: left;
     }
@@ -68,9 +67,10 @@
       width: 150px;
       height: auto;
       position: absolute;
-      opacity: 0.7; /* Make it slightly transparent */
-      animation: drift 30s linear infinite; /* Adjust animation duration and timing function */
-      right: -200px; /* Initially position clouds outside the viewport */
+      opacity: 0.7; 
+      animation: drift 30s linear infinite; /* Adjust animation duration */
+      right: 2000px; /* position clouds out of view while staggering movement */
+      pointer-events: none; /* Make the clouds non-interactable */
     }
 
     .cloud:nth-of-type(2) {
@@ -78,11 +78,11 @@
     }
 
     .cloud:nth-of-type(3) {
-      animation-delay: 10s; /* Delay the third cloud */
+      animation-delay: 11s; /* Delay the third cloud */
     }
 
     @keyframes drift {
-      0% { right: -200px; opacity: 1; }
+      0% { right: -300px; opacity: 1; }
       100% { right: 110%; opacity: 0; }
     }
   </style>  
@@ -115,18 +115,21 @@
     Email: <a href="mailto:Connor@LDMEC.com">Connor@LDMEC.com</a>
   </footer>
   <!-- Clouds -->
-  <img class="cloud" src="cloud1.png" alt="Cloud" style="animation-duration: 30s; top: 0;">
-  <img class="cloud" src="cloud2.png" alt="Cloud" style="animation-duration: 40s; top: 0;">
-  <img class="cloud" src="cloud3.png" alt="Cloud" style="animation-duration: 35s; top: 0;">
+  <img class="cloud" src="cloud1.png" alt="Cloud" style="animation-duration: 30s; ";>
+  <img class="cloud" src="cloud2.png" alt="Cloud" style="animation-duration: 40s; ";>
+  <img class="cloud" src="cloud3.png" alt="Cloud" style="animation-duration: 35s; ";>
+  
   <script>
-    // Get the height of the top 1/8th of the screen
     var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    var cloudHeight = screenHeight / 8;
+    var cloudHeight = screenHeight / 6;
+    console.log("Viewport height:", screenHeight);
+    console.log("Cloud height:", cloudHeight);
     
-    // Set random y-position for each cloud
     var clouds = document.querySelectorAll('.cloud');
     clouds.forEach(function(cloud) {
-      cloud.style.top = Math.floor(Math.random() * cloudHeight) + 'px';
+        var yPos = Math.floor(Math.random() * cloudHeight);
+        console.log("Random Y-Position for Cloud:", yPos);
+        cloud.style.top = yPos + 'px';
     });
   </script>
 </body>
